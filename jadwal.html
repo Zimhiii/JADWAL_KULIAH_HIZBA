@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal Kuliah Modern</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-bottom: 5px solid #ff3333;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: #ff3333;
+      }
+
+      .header p {
+        color: #666;
+        font-size: 1.2rem;
+      }
+
+      .day-section {
+        margin-bottom: 2rem;
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .day-title {
+        font-size: 1.5rem;
+        color: #ff3333;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #ff3333;
+      }
+
+      .courses-container {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 0.5rem;
+      }
+
+      .course-card {
+        min-width: 280px;
+        background: white;
+        border-radius: 10px;
+        padding: 1.2rem;
+        border: 1px solid #eee;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(255, 51, 51, 0.2);
+      }
+
+      .course-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #ff3333;
+        border-radius: 4px 0 0 4px;
+      }
+
+      .course-name {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .course-info {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .info-label {
+        font-weight: bold;
+        color: #ff3333;
+        min-width: 60px;
+      }
+
+      .info-value {
+        color: #666;
+      }
+
+      .time-badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        background: #ff3333;
+        color: white;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .courses-container {
+          flex-direction: column;
+        }
+
+        .course-card {
+          min-width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Jadwal Kuliah</h1>
+        <p>Hizba Jaisy Muhammad - 122140148</p>
+      </div>
+
+      <!-- Senin Section -->
+      <div class="day-section">
+        <h2 class="day-title">Senin</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">10:00</span>
+            <div class="course-name">KOMPUTASI AWAN (RA)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">-</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">KRIPTO (RA)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">IFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selasa Section -->
+      <div class="day-section">
+        <h2 class="day-title">Selasa</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">10:00</span>
+            <div class="course-name">PAM (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">AZR</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">KEAMANAN SIBER (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">WON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rabu Section -->
+      <div class="day-section">
+        <h2 class="day-title">Rabu</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">08:00</span>
+            <div class="course-name">SISFOR LANJUT (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">HBF</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">PEMPAR (R)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">EDN</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">15:30</span>
+            <div class="course-name">SISTER (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">IFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
