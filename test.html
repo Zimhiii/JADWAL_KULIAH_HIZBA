@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jadwal Kuliah Neon</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #000000;
+        background-image: radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 0, 255, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 100% 0%,
+            rgba(255, 0, 0, 0.1) 0%,
+            transparent 50%
+          );
+        min-height: 100vh;
+        padding: 2rem;
+        font-family: "Rajdhani", sans-serif;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 15px;
+        box-shadow: 0 0 20px #ff0000, inset 0 0 15px rgba(255, 0, 0, 0.5);
+        border: 1px solid rgba(255, 0, 0, 0.5);
+        animation: headerPulse 2s infinite;
+      }
+
+      @keyframes headerPulse {
+        0% {
+          box-shadow: 0 0 20px #ff0000, inset 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 30px #ff0000, inset 0 0 25px rgba(255, 0, 0, 0.7);
+        }
+        100% {
+          box-shadow: 0 0 20px #ff0000, inset 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+      }
+
+      .header h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: #ff0000;
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        letter-spacing: 4px;
+        animation: textGlow 1.5s infinite alternate;
+      }
+
+      @keyframes textGlow {
+        from {
+          text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        }
+        to {
+          text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+        }
+      }
+
+      .header p {
+        color: #0088ff;
+        font-size: 1.4rem;
+        text-shadow: 0 0 5px #0088ff, 0 0 10px #0088ff;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      .day-section {
+        margin-bottom: 2rem;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        border: 1px solid rgba(51, 51, 51, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .day-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 1.8rem;
+        color: #ff0000;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #ff0000;
+        text-shadow: 0 0 10px #ff0000;
+        letter-spacing: 3px;
+      }
+
+      .courses-container {
+        display: flex;
+        gap: 1.5rem;
+        overflow-x: auto;
+        padding: 0.5rem;
+        scrollbar-width: thin;
+        scrollbar-color: #ff0000 #000000;
+      }
+
+      .courses-container::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .courses-container::-webkit-scrollbar-track {
+        background: #000000;
+        border-radius: 4px;
+      }
+
+      .courses-container::-webkit-scrollbar-thumb {
+        background: #ff0000;
+        border-radius: 4px;
+        box-shadow: 0 0 5px #ff0000;
+      }
+
+      .course-card {
+        min-width: 300px;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 10px;
+        padding: 1.5rem;
+        border: 1px solid rgba(51, 51, 51, 0.8);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .course-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: #0088ff;
+        border-radius: 4px 0 0 4px;
+        box-shadow: 0 0 10px #0088ff;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 20px rgba(0, 136, 255, 0.3);
+      }
+
+      .course-name {
+        font-family: "Rajdhani", sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #ffffff;
+        text-shadow: 0 0 5px #0088ff, 0 0 10px #0088ff;
+        letter-spacing: 1px;
+      }
+
+      .course-info {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .info-label {
+        font-weight: 600;
+        color: #ff0000;
+        min-width: 70px;
+        text-shadow: 0 0 5px #ff0000;
+        letter-spacing: 1px;
+      }
+
+      .info-value {
+        color: #0088ff;
+        text-shadow: 0 0 5px #0088ff;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      .time-badge {
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        background: linear-gradient(45deg, #ff0000, #ff3333);
+        color: white;
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 0 10px #ff0000;
+        text-shadow: 0 0 5px white;
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-family: "Orbitron", sans-serif;
+      }
+
+      .course-card.active {
+        transform: translateY(-5px);
+        box-shadow: 0 0 30px #0088ff;
+        border: 1px solid #0088ff;
+        animation: cardPulse 2s infinite;
+      }
+
+      @keyframes cardPulse {
+        0% {
+          box-shadow: 0 0 20px #0088ff;
+        }
+        50% {
+          box-shadow: 0 0 40px #0088ff;
+        }
+        100% {
+          box-shadow: 0 0 20px #0088ff;
+        }
+      }
+
+      .course-card.active .time-badge {
+        background: linear-gradient(45deg, #0088ff, #00aaff);
+        box-shadow: 0 0 15px #0088ff;
+        animation: badgePulse 2s infinite;
+      }
+
+      @keyframes badgePulse {
+        0% {
+          box-shadow: 0 0 10px #0088ff;
+        }
+        50% {
+          box-shadow: 0 0 20px #0088ff;
+        }
+        100% {
+          box-shadow: 0 0 10px #0088ff;
+        }
+      }
+
+      .course-card.active::before {
+        background: #ff0000;
+        box-shadow: 0 0 15px #ff0000;
+        animation: borderPulse 2s infinite;
+      }
+
+      @keyframes borderPulse {
+        0% {
+          box-shadow: 0 0 10px #ff0000;
+        }
+        50% {
+          box-shadow: 0 0 20px #ff0000;
+        }
+        100% {
+          box-shadow: 0 0 10px #ff0000;
+        }
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .courses-container {
+          flex-direction: column;
+        }
+
+        .course-card {
+          min-width: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>JADWAL KULIAH</h1>
+        <p>Hizba Jaisy Muhammad - 122140148</p>
+      </div>
+
+      <!-- Senin Section -->
+      <div class="day-section">
+        <h2 class="day-title">SENIN</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">10:00</span>
+            <div class="course-name">KOMPUTASI AWAN (RA)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">-</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">KRIPTO (RA)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">IFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selasa Section -->
+      <div class="day-section">
+        <h2 class="day-title">SELASA</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">10:00</span>
+            <div class="course-name">PAM (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">AZR</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">KEAMANAN SIBER (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">WON</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rabu Section -->
+      <div class="day-section">
+        <h2 class="day-title">RABU</h2>
+        <div class="courses-container">
+          <div class="course-card">
+            <span class="time-badge">08:00</span>
+            <div class="course-name">SISFOR LANJUT (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">HBF</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">13:00</span>
+            <div class="course-name">PEMPAR (R)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">EDN</span>
+              </div>
+            </div>
+          </div>
+          <div class="course-card">
+            <span class="time-badge">15:30</span>
+            <div class="course-name">SISTER (RB)</div>
+            <div class="course-info">
+              <div class="info-item">
+                <span class="info-label">Dosen:</span>
+                <span class="info-value">IFA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateActiveClasses() {
+        const now = new Date();
+        const day = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const currentHour = now.getHours();
+        const currentMinute = now.getMinutes();
+        const currentTime = currentHour * 60 + currentMinute; // Convert to minutes
+
+        const dayMapping = {
+          1: "SENIN",
+          2: "SELASA",
+          3: "RABU",
+        };
+
+        // Remove all active classes first
+        document.querySelectorAll(".course-card").forEach((card) => {
+          card.classList.remove("active");
+        });
+
+        if (day >= 1 && day <= 3) {
+          // Monday to Wednesday
+          const daySections = document.querySelectorAll(".day-section");
+          daySections.forEach((section) => {
+            if (
+              section.querySelector(".day-title").textContent ===
+              dayMapping[day]
+            ) {
+              const courseCards = section.querySelectorAll(".course-card");
+
+              courseCards.forEach((card) => {
+                const timeBadge = card.querySelector(".time-badge");
+                const [hours, minutes = 0] = timeBadge.textContent
+                  .split(":")
+                  .map(Number);
+                const classTime = hours * 60 + minutes;
+
+                // Check if current time is within 2 hours
+
+                // Check if current time is within 2 hours of class start time
+                if (currentTime >= classTime && currentTime < classTime + 120) {
+                  card.classList.add("active");
+                }
+              });
+            }
+          });
+        }
+      }
+
+      // Update active classes every minute
+      updateActiveClasses();
+      setInterval(updateActiveClasses, 60000);
+
+      // Add hover effect sound (optional - uncomment if you want sound effects)
+      /*
+        const courseCards = document.querySelectorAll('.course-card');
+        const hoverSound = new Audio('path_to_hover_sound.mp3'); // Add your sound file
+
+        courseCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                hoverSound.currentTime = 0;
+                hoverSound.play();
+            });
+        });
+        */
+
+      // Add smooth scroll for mobile view
+      document.querySelectorAll(".courses-container").forEach((container) => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        container.addEventListener("mousedown", (e) => {
+          isDown = true;
+          container.style.cursor = "grabbing";
+          startX = e.pageX - container.offsetLeft;
+          scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener("mouseleave", () => {
+          isDown = false;
+          container.style.cursor = "grab";
+        });
+
+        container.addEventListener("mouseup", () => {
+          isDown = false;
+          container.style.cursor = "grab";
+        });
+
+        container.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - container.offsetLeft;
+          const walk = (x - startX) * 2;
+          container.scrollLeft = scrollLeft - walk;
+        });
+      });
+
+      // Add initial loading animation
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".course-card");
+        cards.forEach((card, index) => {
+          card.style.opacity = "0";
+          card.style.transform = "translateY(20px)";
+          setTimeout(() => {
+            card.style.transition = "all 0.5s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+          }, 100 * index);
+        });
+      });
+    </script>
+  </body>
+</html>
